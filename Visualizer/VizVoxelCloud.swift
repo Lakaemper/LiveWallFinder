@@ -21,7 +21,7 @@ class VizVoxelCloud: Drawable{
         }
         //
         // for now, just draw a box for each point. Horribly slow, I presume.
-        let radius = vc.resolution / 2
+        let radius = vc.resolution
         for f in vc.copyAllPoints(){
             geometry = SCNBox(width: CGFloat(radius), height: CGFloat(radius), length: CGFloat(radius), chamferRadius: 0)
             geometry.materials = [mat]

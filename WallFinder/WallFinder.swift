@@ -62,12 +62,28 @@ class WallFinder: FeaturePointUpdateListener {
             var walls = applyWallFilter(featureCloud: rotatedCloud, boundaries: bndr, distThresh: Float(0.3))
             viz.clear()
             viz.addCoordinateCross()
-            viz.addPointCloud(points: walls[0].toDoubleArray(), material: Materials.getColor("redEmission"))
-            viz.addPointCloud(points: walls[1].toDoubleArray(), material: Materials.getColor("redEmission"))
-            viz.addPointCloud(points: walls[2].toDoubleArray(), material: Materials.getColor("redEmission"))
-            viz.addPointCloud(points: walls[3].toDoubleArray(), material: Materials.getColor("redEmission"))
+            
+            //viz.addPointCloud(points: walls[0].toDoubleArray(), material: Materials.getColor("redEmission"))
+            //viz.addPointCloud(points: walls[1].toDoubleArray(), material: Materials.getColor("redEmission"))
+            //viz.addPointCloud(points: walls[2].toDoubleArray(), material: Materials.getColor("redEmission"))
+            //viz.addPointCloud(points: walls[3].toDoubleArray(), material: Materials.getColor("redEmission"))
             viz.addPointCloud(points: walls[4].toDoubleArray(), material: Materials.getColor("greenEmission"))
             viz.addPointCloud(points: walls[5].toDoubleArray(), material: Materials.getColor("whiteEmission"))
+            var f = walls[0]
+            f.setEqualDistibution(equal: true, resolution: 0.2)
+            viz.addVoxelCloud(cloud: f, material: Materials.getColor("red"))
+            f = walls[1]
+            f.setEqualDistibution(equal: true, resolution: 0.2)
+            viz.addVoxelCloud(cloud: f, material: Materials.getColor("red"))
+            f = walls[2]
+            f.setEqualDistibution(equal: true, resolution: 0.2)
+            viz.addVoxelCloud(cloud: f, material: Materials.getColor("red"))
+            f = walls[3]
+            f.setEqualDistibution(equal: true, resolution: 0.2)
+            viz.addVoxelCloud(cloud: f, material: Materials.getColor("red"))
+            
+            
+            
         } else {
             viz.clear()
             viz.addCoordinateCross()
