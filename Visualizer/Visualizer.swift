@@ -206,6 +206,14 @@ public class Visualizer:  UIViewController, SCNSceneRendererDelegate
     }
     
     /**
+     VoxelCloud
+     */
+    public func addVoxelCloud(cloud: FeatureCloud, material: SCNMaterial = Materials.getColor("red")){
+        let cld = VizVoxelCloud(voxels: cloud, material: material)
+        geomNode.addChildNode(cld.node)
+    }
+    
+    /**
      Plane
      */
     public func addPlane(center: SCNVector3 = SCNVector3Zero,

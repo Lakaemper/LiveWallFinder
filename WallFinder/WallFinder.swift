@@ -71,8 +71,9 @@ class WallFinder: FeaturePointUpdateListener {
         } else {
             viz.clear()
             viz.addCoordinateCross()
-            viz.addPointCloud(points: rotatedCloud.toDoubleArray(), material: Materials.getColor("whiteEmission"))
-            
+            //viz.addPointCloud(points: rotatedCloud.toDoubleArray(), material: Materials.getColor("whiteEmission"))
+            rotatedCloud.setEqualDistibution(equal: true, resolution: featureCloud.resolution)
+            viz.addVoxelCloud(cloud: rotatedCloud)
         }
         //
         // Debug Info

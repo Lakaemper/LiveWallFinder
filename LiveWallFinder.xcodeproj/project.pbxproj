@@ -12,6 +12,7 @@
 		E61DFC661F2B964C003243FE /* Analysis1D.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61DFC641F2B963B003243FE /* Analysis1D.swift */; };
 		E61DFC671F2B964C003243FE /* Analysis2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61DFC651F2B963B003243FE /* Analysis2D.swift */; };
 		E61DFC691F2B9660003243FE /* WallFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61DFC681F2B9660003243FE /* WallFinder.swift */; };
+		E63D6EDB1F45D47300271889 /* VizVoxelCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63D6EDA1F45D47300271889 /* VizVoxelCloud.swift */; };
 		E6BF8DC21F44887600BF8142 /* Octree.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BF8DC11F44887600BF8142 /* Octree.swift */; };
 		E6BF8DC41F4488A400BF8142 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BF8DC31F4488A400BF8142 /* Node.swift */; };
 		E6BF8DC61F4489D700BF8142 /* InnerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BF8DC51F4489D700BF8142 /* InnerNode.swift */; };
@@ -53,6 +54,7 @@
 		E61DFC641F2B963B003243FE /* Analysis1D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analysis1D.swift; sourceTree = "<group>"; };
 		E61DFC651F2B963B003243FE /* Analysis2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analysis2D.swift; sourceTree = "<group>"; };
 		E61DFC681F2B9660003243FE /* WallFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallFinder.swift; sourceTree = "<group>"; };
+		E63D6EDA1F45D47300271889 /* VizVoxelCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VizVoxelCloud.swift; sourceTree = "<group>"; };
 		E6BF8DC11F44887600BF8142 /* Octree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Octree.swift; sourceTree = "<group>"; };
 		E6BF8DC31F4488A400BF8142 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		E6BF8DC51F4489D700BF8142 /* InnerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerNode.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				E6F326341F2A45FF00AF7771 /* Visualizer.swift */,
 				E6F326351F2A45FF00AF7771 /* VizPointCloud.swift */,
 				E6BFC3A91F30AE5600003DFA /* VizTextHUD.swift */,
+				E63D6EDA1F45D47300271889 /* VizVoxelCloud.swift */,
 			);
 			path = Visualizer;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				E61DFC5D1F2B5EB2003243FE /* FeaturePointUpdateListener.swift in Sources */,
 				E6F3263E1F2A463200AF7771 /* Visualizer.swift in Sources */,
 				E6BF8DC61F4489D700BF8142 /* InnerNode.swift in Sources */,
+				E63D6EDB1F45D47300271889 /* VizVoxelCloud.swift in Sources */,
 				E6BF8DC41F4488A400BF8142 /* Node.swift in Sources */,
 				E6F3263F1F2A463200AF7771 /* VizPointCloud.swift in Sources */,
 				E6F3261C1F2A366100AF7771 /* ViewController.swift in Sources */,

@@ -66,6 +66,7 @@ public class FeatureCloud{
                     quantizedPoints.append(fp1)
                 }
             }
+            self.allFeaturePoints = quantizedPoints
         }
         //
         // inform all listeners about the update
