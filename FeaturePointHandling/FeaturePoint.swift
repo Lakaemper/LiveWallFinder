@@ -9,6 +9,12 @@
 import Foundation
 struct FeaturePoint: Hashable{
     //
+    // fields
+    var x: Float = 0
+    var y: Float = 0
+    var z: Float = 0
+    
+    //
     // Hashvalue
     var hashValue: Int {
         var hashValue = (Int(y) << 12) * 11 + (Int(x) << 6) * 13
@@ -21,12 +27,6 @@ struct FeaturePoint: Hashable{
     static func ==(lhs: FeaturePoint, rhs: FeaturePoint) -> Bool {
         return (lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z)
     }
-    
-    //
-    // fields
-    var x: Float = 0
-    var y: Float = 0
-    var z: Float = 0
     
     //
     // initializer

@@ -59,7 +59,7 @@ class WallFinder: FeaturePointUpdateListener {
         if (boundaries.validResult){
             
             let bndr = (boundaries.minX, boundaries.minY, boundaries.minZ, boundaries.maxX, boundaries.maxY, boundaries.maxZ)
-            var walls = applyWallFilter(featureCloud: rotatedCloud, boundaries: bndr, distThresh: Float(0.3))
+            var walls = applyWallFilter(featureCloud: rotatedCloud, boundaries: bndr, distThresh: Float(0.3), projectPoints: true)
             viz.clear()
             viz.addCoordinateCross()
             
@@ -81,9 +81,6 @@ class WallFinder: FeaturePointUpdateListener {
             f = walls[3]
             f.setEqualDistibution(equal: true, resolution: 0.2)
             viz.addVoxelCloud(cloud: f, material: Materials.getColor("red"))
-            
-            
-            
         } else {
             viz.clear()
             viz.addCoordinateCross()
@@ -225,63 +222,81 @@ class WallFinder: FeaturePointUpdateListener {
     // -------------------------------------------------------------------------------------------------------------
     /// WallFilter: separates points of a featureCloud into 6 FeatureClouds representing floor, 4 walls, remaining
     /// (currently the ceiling is not built in)
-    func applyWallFilter(featureCloud: FeatureCloud, boundaries:(minX: Double, minY: Double, minZ: Double, maxX: Double, maxY: Double, maxZ: Double), distThresh: Float)->[FeatureCloud]{
-        let points = featureCloud.copyAllPoints()
-        // 'nswefr' = north south west east floor remaining
-        var nswefr = [[FeaturePoint]](repeating: [FeaturePoint](), count: 6)
-        let minx = Float(boundaries.minX)
-        let miny = Float(boundaries.minY)
-        let minz = Float(boundaries.minZ)
-        let maxx = Float(boundaries.maxX)
-        //let maxy = Float(boundaries.maxY)
-        let maxz = Float(boundaries.maxZ)
-        //
-        for f in points{
-            var minV = 1e20 as Float
-            var minI = 0
-            var d = 0.0 as Float
-            // north
-            d = abs(f.z - minz)
-            if (d < minV){
-                minV = d
-                minI = 0
+    func applyWallFilter(featureCloud: FeatureCloud,
+                         boundaries:(minX: Double,minY: Double, minZ: Double, maxX: Double, maxY: Double, maxZ: Double),
+                         distThresh: Float,
+                         projectPoints: Bool = false)
+        ->[FeatureCloud]{
+            let points = featureCloud.copyAllPoints()
+            // 'nswefr' = north south west east floor remaining
+            var nswefr = [[FeaturePoint]](repeating: [FeaturePoint](), count: 6)
+            let minx = Float(boundaries.minX)
+            let miny = Float(boundaries.minY)
+            let minz = Float(boundaries.minZ)
+            let maxx = Float(boundaries.maxX)
+            //let maxy = Float(boundaries.maxY)
+            let maxz = Float(boundaries.maxZ)
+            //
+            for f in points{
+                var minV = 1e20 as Float
+                var minI = 0
+                var d = 0.0 as Float
+                // north
+                d = abs(f.z - minz)
+                if (d < minV){
+                    minV = d
+                    minI = 0
+                }
+                // south
+                d = abs(f.z - maxz)
+                if (d < minV){
+                    minV = d
+                    minI = 1
+                }
+                // west
+                d = abs(f.x - minx)
+                if (d < minV){
+                    minV = d
+                    minI = 2
+                }
+                // east
+                d = abs(f.x - maxx)
+                if (d < minV){
+                    minV = d
+                    minI = 3
+                }
+                // floor
+                d = abs(f.y - miny)
+                if (d < minV){
+                    minV = d
+                    minI = 4
+                }
+                // remaining
+                if (minV > distThresh){
+                    minI = 5
+                }
+                //
+                // optional point projection
+                if (projectPoints){
+                    var f1 = f
+                    switch (minI){
+                    case 0: f1.z = minz
+                    case 1: f1.z = maxz
+                    case 2: f1.x = minx
+                    case 3: f1.x = maxx
+                    case 4: f1.y = miny
+                    default: break
+                    }
+                    nswefr[minI].append(f1)
+                } else {
+                    nswefr[minI].append(f)
+                }
             }
-            // south
-            d = abs(f.z - maxz)
-            if (d < minV){
-                minV = d
-                minI = 1
+            var clouds = [FeatureCloud]()
+            for i in 0...5{
+                clouds.append(FeatureCloud(points: nswefr[i]))
             }
-            // west
-            d = abs(f.x - minx)
-            if (d < minV){
-                minV = d
-                minI = 2
-            }
-            // east
-            d = abs(f.x - maxx)
-            if (d < minV){
-                minV = d
-                minI = 3
-            }
-            // floor
-            d = abs(f.y - miny)
-            if (d < minV){
-                minV = d
-                minI = 4
-            }
-            // remaining
-            if (minV > distThresh){
-                minI = 5
-            }
-            nswefr[minI].append(f)
-        }
-        var clouds = [FeatureCloud]()
-        for i in 0...5{
-            clouds.append(FeatureCloud(points: nswefr[i]))
-        }
-        return(clouds)
+            return(clouds)
     }
 }
-
 
